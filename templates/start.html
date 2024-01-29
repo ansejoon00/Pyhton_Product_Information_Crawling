@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSHSM</title>
+  <link rel="stylesheet" href="static/css/start.css">
+</head>
+
+<body>
+  <div id="container" class="container">
+    <!-- FORM SECTION -->
+    <div class="row">
+      <!-- SIGN UP -->
+      <div class="col align-items-center flex-col sign-up">
+        <form action="/" method="post">
+          <div class="form-wrapper align-items-center">
+            <div class="form sign-up">
+              <div class="input-group">
+                <i class='bx bxs-user'></i>
+                <input type="text" placeholder="ID" name="upId">
+              </div>
+              <div class="input-group">
+                <i class='bx bxs-lock-alt'></i>
+                <input type="password" placeholder="PASSWORD" name="upPw">
+              </div>
+              <div class="input-group">
+                <i class='bx bxs-name'></i>
+                <input type="text" placeholder="NAME" name="name">
+              </div>
+              <div class="input-group">
+                <i class='bx bx-mail-send'></i>
+                <input type="email" placeholder="EMAIL" name="email">
+              </div>
+              <div class="input-group">
+                <i class='bx bxs-lock-alt'></i>
+                <input type="text" placeholder="PHONENUM" id="phone-num" name="phone-num">
+              </div>
+              <button>
+                회원가입
+              </button>
+        </form>
+        <p>
+          <span>
+            계정이 있다면?
+          </span>
+          <b onclick="toggle()" class="pointer">
+            여기를 눌러주세요
+          </b>
+        </p>
+      </div>
+      <!-- END SIGN UP -->
+    </div>
+  </div>
+  <!-- SIGN IN -->
+  <div class="col align-items-center flex-col sign-in">
+    <div class="form-wrapper align-items-center">
+      <form action="/" method="post">
+        <div class="form sign-in">
+          <div class="input-group">
+            <i class='bx bxs-user'></i>
+            <input type="text" name="inId" placeholder="ID">
+          </div>
+          <div class="input-group">
+            <i class='bx bxs-lock-alt'></i>
+            <input type="password" name="inPw" placeholder="PASSWORD">
+          </div>
+          <button id="login-button" type="submit" style="margin-bottom: 5px;">로그인</button>
+          <b id="sign-up" onclick="toggle()" class="pointer">
+            회원가입
+          </b>
+          </p>
+        </div>
+      </form>
+    </div>
+    <div class="form-wrapper">
+    </div>
+  </div>
+  <!-- END SIGN IN -->
+  </div>
+  <!-- END FORM SECTION -->
+  <!-- CONTENT SECTION -->
+  <div class="row content-row">
+    <!-- SIGN IN CONTENT -->
+    <div class="col align-items-center flex-col">
+      <div class="text sign-in">
+        <h2>
+          <img src="{{ url_for('static', filename='image/logo.png') }}" height="50px">
+        </h2>
+      </div>
+      <div class="img sign-in">
+      </div>
+    </div>
+    <!-- END SIGN IN CONTENT -->
+    <!-- SIGN UP CONTENT -->
+    <div class="col align-items-center flex-col">
+      <div class="img sign-up">
+      </div>
+      <div class="text sign-up">
+        <h2>
+          가입을<br>통해<br>우리와<br>함께해요!
+        </h2>
+      </div>
+    </div>
+    <!-- END SIGN UP CONTENT -->
+  </div>
+  <!-- END CONTENT SECTION -->
+  </div>
+
+  <script>
+    let container = document.getElementById('container')
+    toggle = () => {
+      container.classList.toggle('sign-in')
+      container.classList.toggle('sign-up')
+    }
+    setTimeout(() => {
+      container.classList.add('sign-in')
+    }, 200)
+
+    // 전화번호 형식 변환 함수
+    function formatPhoneNumber() {
+      var input = document.getElementById('phone-num');
+      var phoneNumber = input.value.replace(/\D/g, ''); // 숫자 이외의 문자 제거
+
+      if (phoneNumber.length === 10) {
+        phoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{3})/, '$1-$2-$3');
+        input.value = phoneNumber;
+      }
+    }
+
+    // 입력 값이 변경될 때마다 형식 변환 함수 호출
+    document.getElementById('phone-num').addEventListener('input', formatPhoneNumber);
+
+    // 버튼과 플래시 메시지를 가져옴
+    var loginButton = document.getElementById("login-button");
+    var signUp = document.getElementById("sign-up");
+
+    // 로그인 버튼 클릭 시
+    // Flash 메시지를 alert 메시지로 대체
+    var errorMessage = "{{ error_message }}";
+    var successMessage = "{{ success_message }}";
+
+    if (errorMessage) {
+      alert(errorMessage);
+    }
+
+    if (successMessage) {
+      alert(successMessage);
+    }
+  </script>
+</body>
+
+</html>
