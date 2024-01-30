@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../static/css/index.css" />
+  <script src="../static/js/index.js"></script>
+  <!-- jQuery 포함 -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- Font Awesome 연결 -->
+  <script src="https://kit.fontawesome.com/a550e6b6a5.js" crossorigin="anonymous"></script>
+  <style>
+    /* 우측 하단에 맨 위로 올라가는 버튼 스타일 */
+    #scrollToTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #333333;
+      /* 버튼 배경색 */
+      color: #fff;
+      /* 버튼 텍스트 색상 */
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      cursor: pointer;
+      line-height: 30px;
+      /* 텍스트 높이와 버튼 높이 일치 */
+      text-align: center;
+      /* 텍스트 중앙 정렬 */
+    }
+
+    #scrollToTopBtn i {
+      font-size: 23px;
+      vertical-align: middle;
+      /* 텍스트 수직 정렬을 중앙으로 조절 */
+      line-height: 30px;
+      /* 아이콘의 높이와 버튼 높이 일치 */
+      line-height: inherit;
+      /* 부모의 line-height를 상속받음 */
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <a href="/index"><img src="{{ url_for('static', filename='image/logo.png') }}" alt="로고" width="150" /></a>
+      </div>
+      <div class="search-section" id="textSearchBox">
+        <h5 id="text-title"></h5>
+        <form id="textSearchForm">
+          <label for="textQuery">검색어:</label>
+          <input type="text" id="textQuery" placeholder="상품을 검색해 주세요!" name="query" required
+            onkeydown="handleKeyDown(event)" />
+          <button type="button" onclick="searchText()">검색</button>
+        </form>
+      </div>
+
+      <!-- 이미지로 상품 정보 검색 -->
+      <div class="search-section" id="imageSearchBox" style="display: none">
+        <form id="imageSearchForm">
+          <label for="image"></label>
+          <div id="image-container" onclick="triggerImageInputClick()"></div>
+          <input type="file" id="image" accept="image/*" onchange="displaySelectedImage()" required />
+          <button id="image-search" type="button" onclick="detectAndSearch()">
+            검색
+          </button>
+        </form>
+      </div>
+
+      <!-- 토글 버튼 아이콘으로 변경 -->
+      <button id="toggleSearchType" onclick="toggleSearchType()">
+        <i class="fas fa-camera"></i>
+      </button>
+      <div class="user-options">
+        <span>
+          <p>{{ user }}님 환영합니다!</p>
+        </span><span><a href="/logout" name="logout">로그아웃</a></span>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="slider">
+      <div class="slide">
+        <img class="bane-image" src="{{ url_for('static', filename='image/image1.jpg') }}" alt="이미지 1">
+      </div>
+      <div class="slide">
+        <img class="bane-image" src="{{ url_for('static', filename='image/image2.jpg') }}" alt="이미지 2">
+      </div>
+      <div class="slide">
+        <img class="bane-image" src="{{ url_for('static', filename='image/image3.jpg') }}" alt="이미지 3">
+      </div>
+      <div class="slide">
+        <img class="bane-image" src="{{ url_for('static', filename='image/image4.jpg') }}" alt="이미지 4">
+      </div>
+      <div class="slide">
+        <img class="bane-image" src="{{ url_for('static', filename='image/image5.jpg') }}" alt="이미지 5">
+      </div>
+    </div>
+    <div id="searchResult">
+      <h5> </h5>
+      <ul id="text"></ul>
+      <ul id="result"></ul>
+    </div>
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide');
+      const slideCount = slides.length;
+
+      function showSlide(n) {
+        slides.forEach(slide => slide.style.display = 'none');
+        slides[n].style.display = 'block';
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slideCount;
+        showSlide(currentSlide);
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+        showSlide(currentSlide);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        showSlide(currentSlide);
+        setInterval(nextSlide, 1800); // 1.8초마다 자동 슬라이드
+      });
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slideCount;
+        moveSlides(-100); // 왼쪽으로 이동
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+        moveSlides(100); // 오른쪽으로 이동
+      }
+
+      function moveSlides(percentage) {
+        const translateXValue = `${percentage}%`;
+        slides.forEach((slide, index) => {
+          if (index === currentSlide) {
+            slide.style.transition = 'transform 0.5s ease-in-out';
+            slide.style.transform = `translateX(${translateXValue})`;
+          } else {
+            slide.style.transition = 'none';
+            slide.style.transform = 'translateX(0)';
+          }
+        });
+
+        // 이동 애니메이션이 끝난 후 초기화
+        setTimeout(() => {
+          slides.forEach(slide => {
+            slide.style.transition = 'none';
+            slide.style.transform = 'translateX(0)';
+          });
+          showSlide(currentSlide);
+        }, 500); // 0.5초 후에 초기화
+      }
+    </script>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 MSHSM 상품 검색. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- 우측 하단에 맨 위로 올라가는 버튼 -->
+  <div id="scrollToTopBtn" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  <script>
+    function toggleSearchType() {
+      var textSearchBox = document.getElementById("textSearchBox");
+      var imageSearchBox = document.getElementById("imageSearchBox");
+      var toggleButton = document.getElementById("toggleSearchType");
+      var textResults = document.getElementById("text");
+      var imageResults = document.getElementById("result");
+
+      if (textSearchBox.style.display === "none") {
+        textSearchBox.style.display = "block";
+        imageSearchBox.style.display = "none";
+        toggleButton.innerHTML = '<i class="fas fa-camera"></i>';
+
+        // 텍스트 검색 결과를 표시할 때 이미지 검색 결과 지우기
+        imageResults.innerHTML = "";
+
+      } else {
+        textSearchBox.style.display = "none";
+        imageSearchBox.style.display = "block";
+        toggleButton.innerHTML = '<i class="fas fa-keyboard"></i>';
+
+        // 이미지 검색 결과를 표시할 때 텍스트 검색 결과를 지우기
+        textResults.innerHTML = "";
+      }
+    }
+
+    // 페이지 맨 위로 스크롤하는 함수
+    function scrollToTop() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+    }
+
+    // 스크롤 이벤트를 감지하여 버튼 표시/숨김
+    window.onscroll = function () {
+      var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+      // 스크롤이 일정 이상 되면 버튼을 표시, 그렇지 않으면 숨김
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        scrollToTopBtn.style.display = "block";
+      } else {
+        scrollToTopBtn.style.display = "none";
+      }
+    };
+  </script>
+</body>
+
+</html>
