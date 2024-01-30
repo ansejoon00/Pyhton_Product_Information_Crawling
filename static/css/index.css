@@ -1,0 +1,463 @@
+.slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.slide {
+    width: 1200px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.bane-image {
+    width: 100%;
+    object-fit: cover;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#searchResult {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 15px;
+    padding: 10px;
+    background-color: #F1F4F6;
+}
+
+.product-info {
+    background-color: white;
+}
+
+h1,
+h2 {
+    color: #333;
+}
+
+#text-title {
+    margin-bottom: 15px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-section {
+    width: 48%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+input[type="text"],
+input[type="file"] {
+    padding: 8px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#image-search {
+    margin-top: 4%;
+    width: 105px;
+    height: 40px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+li img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#image-container {
+    margin-top: 20px;
+}
+
+#result {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#result li {
+    width: 48%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .search-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.result-box {
+    width: 100%;
+    margin-right: 20px;
+    /* 결과 상자 간 간격을 조절 */
+}
+
+.result-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* 결과를 좌측 정렬로 설정 */
+}
+
+.result-box {
+    color: black;
+}
+
+.product-link {
+    color: blue;
+    /* text-decoration: dashed; */
+}
+
+.product-info {
+    display: flex;
+    flex-direction: row;
+    /* 가로로 배열되도록 설정 */
+    margin: 0 20px;
+    /* 양쪽 여백 설정 */
+    border: 15px solid #FFFFFF;
+    /* 테두리 스타일 및 색상 설정 */
+}
+
+.product-info img {
+    margin-right: 10px;
+    /* 이미지와 정보 간격 조정 */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+#main-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+section {
+    background-color: #F1F4F6;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F1F4F6;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+#main-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+section {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+section ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+section li {
+    width: 30%;
+    /* 3개의 아이템이 한 줄에 들어가도록 조정 */
+    margin-bottom: 10px;
+}
+
+section a:hover {
+    background-color: #f0f0f0;
+}
+
+section li {
+    width: 30%;
+    /* 3개의 아이템이 한 줄에 들어가도록 조정 */
+    margin-bottom: 10px;
+}
+
+section a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+    /* 텍스트가 div를 벗어나지 않도록 설정 */
+    overflow: hidden;
+    /* 넘치는 부분을 감추기 */
+    text-overflow: ellipsis;
+    /* 넘치는 텍스트에 ... 추가 */
+}
+
+section a:hover {
+    background-color: #f0f0f0;
+}
+
+.result-box a.product-link {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 60px;
+    /* 최대 3줄에 해당하는 높이 (3줄 * 20px 줄 높이) */
+}
+
+#image-container {
+    width: 450px;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 20px;
+    border: 2px dashed #999;
+    /* 점선 테두리 */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#image-container img {
+    max-width: 80%;
+    /* 이미지 크기 조절 */
+    height: auto;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+#imageSearchForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#imageSearchForm label {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#imageSearchForm #image {
+    display: none;
+    /* 기본 파일 입력 숨김 */
+}
+
+#imageSearchForm #fake-button {
+    padding: 10px;
+    border: 2px dashed #999;
+    /* 점선 테두리 */
+    border-radius: 5px;
+}
+
+#imageSearchForm #fake-button:hover {
+    background-color: #f0f0f0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.main-content {
+    padding: 20px 0;
+}
+
+.search-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-section {
+    width: 48%;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+button {
+    width: 70px;
+    background-color: #333;
+    color: #fff;
+    /* padding: 10px; */
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+#search-results {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.logo img {
+    vertical-align: middle;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-options {
+    display: inline-flex;
+}
+
+.user-options a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.user-options a:hover {
+    text-decoration: underline;
+}
